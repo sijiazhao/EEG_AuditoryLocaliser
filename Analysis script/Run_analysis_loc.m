@@ -1,7 +1,7 @@
 %% A fieldtrip script to run preprocessing on localiser
 % Sijia Zhao
 clc;clear;close all;
-% addpath(genpath('E:\Sijia\Toolboxes\fieldtrip-20170813')); % Please add the fieldtrip toolbox
+addpath(genpath('E:\Sijia\Toolboxes\fieldtrip-20170813')); % Please add the fieldtrip toolbox
 
 filename = 'data_loc.bdf'; % Please download the example data from https://osf.io/b7dz2/
 
