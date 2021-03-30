@@ -40,10 +40,19 @@ cfg = [];
 cfg.resamplefs = 256;
 data = ft_resampledata(cfg,data);
 
-%% baseline correction
+%% Re-reference
 cfg = [];
-cfg.baseline = [-0.1 0];
-data = ft_timelockbaseline(cfg,data);
+cfg.reref = 'yes';
+cfg.refchannel = 'EEG';
+cfg.refmethod = 'avg';
+cfg.montage = 'no';
+data  = ft_preprocessing(cfg,data);
+
+%% Baseline Correct
+cfg = [];
+cfg.demean = 'yes';
+cfg.baselinewindow = [-0.1 0];
+data = ft_preprocessing(cfg, data);
 
 %% average across trials
 cfg = [];
@@ -57,7 +66,7 @@ timelock = ft_timelockanalysis(cfg,data);
 
 cfg = [];
 cfg.parameter = 'avg';
-avg = ft_timelockgrandaverage(cfg,data);
+avg = ft_timelockgrandaverage(cfg,timelock);
 
 %% Convert the label names
 avg.label = convertBiosemiLabelName(avg.label);
